@@ -1,0 +1,139 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+    "width": 1920,
+    "spacing": 0, // Gaps between modules (4px)
+    "margin": 0,
+
+
+    "modules-left": ["network", "bluetooth","hyprland/workspaces", "hyprland/window"],
+    "modules-center": [],
+    "modules-right": ["custom/swaync", "pulseaudio", "backlight", "temperature", "cpu", "memory", "battery", "clock", "tray"],
+
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""],
+        "tooltip": false
+    },
+
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        // "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C ",
+        "format": "{temperatureC}°C "
+    },
+
+    "custom/swaync": {
+        "format": "",
+        "on-click": "~/.config/hypr/swaync/scripts/tray_waybar.sh",
+        "on-click-right": "swaync-client -C",
+        "tooltip": false
+        },
+    
+    "hyprland/workspaces": {
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "format": "{name}",
+        "format-icons": {
+            // "1": "",
+            // "2": "",
+            // "3": "",
+            //         "1": "",
+            //         "2": "",
+            //         "3": "",
+            //         "4": "",
+            //         "5": "",
+            //         "urgent": "",
+            // "focused": "",
+            "default": ""
+        }
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        "timezone": "Europe/Warsaw",
+        // "locale": "pl_PL", 
+        "format": "{:%H:%M} ",
+        "format-alt": "{:%d.%m.%Y} ",
+        "tooltip": true,
+        "tooltip-format": "<big>{:%d.%m.%Y %B}\n<tt>{calendar}</tt></big>",
+        "calendar": {
+            "mode"          : "month",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
+            "on-click-right": "mode",
+            "format": {
+                      "months":     "<span color='#ffead3'><b>{}</b></span>",
+                      "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                      "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                      "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                      "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                      }
+        }
+    },
+    "battery": {
+        "bat": "BAT1",
+        "interval": 60,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""],
+        "max-length": 25
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": true,
+        "tooltip-format": "{avg_frequency}"
+    },
+    "memory": {
+        // "interval": 30,
+        "format": "{percentage}% "
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "({signalStrength}%) {essid} ",
+        // "format-ethernet": "{ipaddr}/{cidr} ",
+        "format-ethernet": "",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "⚠"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon}  {format_source}",
+        "format-bluetooth": "{volume}%  {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "bluetooth": {
+        // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
+        "format": "{status} ",
+        "format-disabled": "{num_connections} ", // an empty format will hide the module
+        "format-connected": "{num_connections} ",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        // "on-click": "~/scripts/bluetooth-switch.sh"
+    },
+    "custom/power": {
+        "format": "⏻",
+        "tooltip": false,
+        "on-click": "wlogout"
+    }
+}
